@@ -1,0 +1,20 @@
+~
+	Program that calculates if a number is prime or not
+~
+main:
+	integer i;
+	integer number;
+	bool isPrime;
+	isPrime @ true;
+	number @ console.readInteger();
+	for i in 2 _ number:
+		if number % i ! 0:
+			isPrime @ false;
+		end
+	end
+	if isPrime:
+		console.writeText("The number is prime");
+	else:
+		console.writeText("The number is not prime");
+	end;
+end

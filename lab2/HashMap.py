@@ -37,7 +37,7 @@ class HashMap:
     def hash(self, key) -> int:
         key_hash_sum = 0
         for position, char in enumerate(key):
-            key_hash_sum += position * ord(char)
+            key_hash_sum += (position + 1) * ord(char)
         key_hash = key_hash_sum % self.__size
         print(f"Hashed key {key} into {key_hash}")
         return key_hash
@@ -69,8 +69,17 @@ class HashMap:
                 print(f"For key {key} the value found is: {node.value}")
                 return node.value
             node = node.next
-
         raise Exception("Key not found!")
+
+    def contains(self, key):
+        key_hash: int = self.hash(key)
+        node = self.__nodes[key_hash]
+        while node is not None:
+            if node.key == key:
+                print(f"For key {key} the value found is: {node.value}")
+                return True
+            node = node.next
+        return False
 
     def __len__(self):
         return self.__length

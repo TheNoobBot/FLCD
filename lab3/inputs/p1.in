@@ -1,0 +1,20 @@
+~Program that calculates the max between 3 numbers~
+
+main:
+	integer value1;
+	integer value2;
+	integer value3;
+	integer max;
+
+	value1 @ console.readInteger();
+	value2 @ console.readInteger();
+	value3 @ console.readInteger();
+	max @ value1;
+	if max < value2:
+		max @ value2;
+	end;
+	if max < value3:
+		max @ value3;
+	end;
+	console.writeInteger(max);
+end

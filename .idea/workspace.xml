@@ -25,6 +25,11 @@
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Istvan\PycharmProjects\FLCD\lab2" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="FLCD" />
@@ -194,7 +199,7 @@
       <workItem from="1602602357343" duration="903000" />
       <workItem from="1602603584528" duration="898000" />
       <workItem from="1602604629744" duration="745000" />
-      <workItem from="1602605403056" duration="396000" />
+      <workItem from="1602605403056" duration="693000" />
     </task>
     <servers />
   </component>
