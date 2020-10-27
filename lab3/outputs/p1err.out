@@ -1,0 +1,15 @@
+ main:
+integer value1;
+integer value2;
+integer value3;
+integer max;
+value1 @ console.readInteger();
+value2 @ console.readInteger();
+value3 @ console.readInteger();
+max @ value1;
+if max < value2:
+max $ value2;
+if max < value3:
+max @ 'value3';
+console.writeInteger(max);
+end

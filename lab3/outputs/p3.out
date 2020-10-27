@@ -1,0 +1,18 @@
+ main:
+integer i;
+integer initialNumber;
+integer reverseNumber;
+integer pop;
+integer aux;
+initialNumber @ console.readInteger();
+aux @ initialNumber;
+while aux ! 0:
+pop @ aux % 10;
+aux @ aux \ 10;
+reverseNumber @ reverseNumber * 10 + pop;
+end if initialNumber = reverseNumber:
+console.writeText("The number initial number is palindrom");
+else:
+console.writeText("The number initial number is not palindrom");
+end;
+end
