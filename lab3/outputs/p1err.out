@@ -11,5 +11,4 @@ if max < value2:
 max $ value2;
 if max < value3:
 max @ 'value3';
-console.writeInteger(max);
-end
+console.writeInteger(max)

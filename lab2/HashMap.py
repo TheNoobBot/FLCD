@@ -45,15 +45,18 @@ class HashMap:
         for position, char in enumerate(key):
             key_hash_sum += (position + 1) * ord(char)
         key_hash = key_hash_sum % self.__size
-        print(f"Hashed key {key} into {key_hash}")
+        # print(f"Hashed key {key} into {key_hash}")
         return key_hash
 
     # Creates a {key, value} node if the key is not in the HashMap
     # Updates the value if the key already is in the HashMap
-    def set(self, key, value):
+    def set(self, key, value=None):
         key_hash: int = self.hash(key)
         node = self.__nodes[key_hash]
+        index = 0
         if node is None:
+            if value is None:
+                value = f"{key_hash}-{index}"
             node = Node(key, value)
             self.__length += 1
             self.__keys.append(key)
@@ -66,8 +69,11 @@ class HashMap:
                 return
             prev = node
             node = node.next
+            index += 1
         self.__length += 1
         self.__keys.append(key)
+        if value is None:
+            value = f"{key_hash}-{index}"
         prev.next = Node(key, value)
 
     # Returns the value of the key
@@ -78,7 +84,7 @@ class HashMap:
         node = self.__nodes[key_hash]
         while node is not None:
             if node.key == key:
-                print(f"For key {key} the value found is: {node.value}")
+                # print(f"For key {key} the value found is: {node.value}")
                 return node.value
             node = node.next
         raise Exception("Key not found!")
@@ -89,7 +95,7 @@ class HashMap:
         node = self.__nodes[key_hash]
         while node is not None:
             if node.key == key:
-                print(f"For key {key} the value found is: {node.value}")
+                # print(f"For key {key} the value found is: {node.value}")
                 return True
             node = node.next
         return False

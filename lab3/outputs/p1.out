@@ -13,5 +13,4 @@ end;
 if max < value3:
 max @ value3;
 end;
-console.writeInteger(max);
-end
+console.writeInteger(max)

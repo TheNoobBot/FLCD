@@ -14,5 +14,4 @@ end if initialNumber = reverseNumber:
 console.writeText("The number initial number is palindrom");
 else:
 console.writeText("The number initial number is not palindrom");
-end;
 end

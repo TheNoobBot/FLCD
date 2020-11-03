@@ -68,4 +68,23 @@ def split_tokens(full_program, separators):
             string_index = int(tokens[index][1:-1])
             tokens[index] = strings[string_index]
 
-    return [token for token in tokens if token != '']
+    tokens = [token for token in tokens if token != '']
+
+    with_floats = []
+    ignore = 0
+    if len(tokens) > 3:
+        for token_index in range(0, len(tokens) - 2):
+            if ignore == 0:
+                together = tokens[token_index] +  tokens[token_index+1] + tokens[token_index+2]
+                if float(together):
+                    with_floats.append(together)
+                    ignore = 2
+                else:
+                    with_floats.append(tokens[token_index])
+            else:
+                ignore -= 1
+    return with_floats
+
+
+def float(token):
+    return re.match("^0\.[0-9]*$", token) is not None or re.match("^-?[1-9][0-9]*\.[0-9]+$", token) is not None

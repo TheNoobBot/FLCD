@@ -11,5 +11,4 @@ end end if isPrime:
 console.writeText("The number is prime");
 else:
 console.writeText("The number is not prime");
-end;
 end

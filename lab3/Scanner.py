@@ -14,6 +14,7 @@ class Scanner:
 
     # reads tokenizes the file content after which classifies and codifies them, then prints the result in output files
     def scan(self, file):
+        contains_error = False
         tokens = tokenize(file, self.separators)
         self.pif = []
         self.symbolicTable = SymbolicTable()
@@ -21,15 +22,23 @@ class Scanner:
             codification = self.classify(token)
             if codification is None:
                 self.pif.append((
-                    f"Codification error. Invalid token {token} at position {self.get_token_first_location(file, token)}",
+                    f"Codification error. Invalid token {token} at line {self.get_token_first_location(file, token)}",
                     -1,))
+                contains_error = True
             else:
                 self.codify(token, codification)
+        if contains_error:
+            print(f"There is a lexycal in {file} error. Please check the {file[7:-3]}.pif for more info")
+        else:
+            print(f"{file} success!")
+
         file = file.split("/")[-1]
         with open(f"outputs/{file[:-3]}.pif", 'w') as out_file:
+            out_file.write(f"TokenId  ->  Address(or -1)\n")
             for pif in self.pif:
                 out_file.write(f"{pif[0]}  ->  {pif[1]}\n")
         with open(f"outputs/{file[:-3]}.st", 'w') as out_file:
+            out_file.write(f"Address  ->  Value\n")
             for key in self.symbolicTable.keys():
                 out_file.write(f"{self.symbolicTable.get(key)}  ->  {key}\n")
         with open(f"outputs/{file[:-3]}.out", 'w') as out_file:
@@ -85,7 +94,12 @@ class Scanner:
     # checks whether the token is of format ^[1-9][0-9]*$ or 0
     @staticmethod
     def int(token):
-        return token == "0" or re.match("^[1-9][0-9]*$", token) is not None
+        return token == "0" or re.match("^-?[1-9][0-9]*$", token) is not None
+
+    @staticmethod
+    # checks whether the token is of format ^0\.[0-9]*$ or ^-?[1-9][0-9]*\.[0-9]+$
+    def float(token):
+        return re.match("^0\.[0-9]*$", token) is not None or re.match("^-?[1-9][0-9]*\.[0-9]+$", token) is not None
 
     # checks whether the token is of format ^\'.\'$
     @staticmethod
@@ -104,7 +118,7 @@ class Scanner:
 
     # checks whether the token is int, char, string or bool
     def constant(self, token):
-        return self.int(token) or self.char(token) or self.string(token) or self.bool(token)
+        return self.int(token) or self.float(token) or self.char(token) or self.string(token) or self.bool(token)
 
     # Returns the location of the token in a file.
     # It is used so we will know when an invalid token is found the line where it is
