@@ -19,8 +19,7 @@ class FA:
     def validate_sequence(self, sequence):
         state = self.initial
         while len(sequence) > 0 and state is not None:
-            transition = (state, sequence.pop(0))
-            state = self.transitions[transition] if transition in self.transitions.keys() else None
+            state = self.transitions[(state, sequence.pop(0))] if (state, sequence[0]) in self.transitions else None
         return state is not None and state in self.final
 
     @staticmethod
